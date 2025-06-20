@@ -1,0 +1,15 @@
+# Dependencias
+node_modules
+
+# Database
+db/*.db
+
+# Readme
+lista-desafio.MD
+
+# Environment
+.env
+.env.test
+
+# Build
+build
