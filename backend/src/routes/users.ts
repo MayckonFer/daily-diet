@@ -6,12 +6,14 @@ import { getUserById } from "../controllers/user/get-users-by-id";
 import { deleteUser } from "../controllers/user/delete-users";
 import { updateUser } from "../controllers/user/updated-users";
 import { session } from "../controllers/user/session";
+import { logout } from "../controllers/user/logout-users";
 
 import { checkSessionIdExist } from "../middleware/check-session-id";
 
 export async function userRoutes(app: FastifyInstance) {
   app.post("/create", createUser);
   app.post("/session", session);
+  app.post("/logout", { preHandler: [checkSessionIdExist] }, logout);
   app.get("/list", { preHandler: [checkSessionIdExist] }, getUser);
   app.get("/list/:id", { preHandler: [checkSessionIdExist] }, getUserById);
   app.delete("/delete/:id", { preHandler: [checkSessionIdExist] }, deleteUser);

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Nunito_Sans, Nunito } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+
 import "../app/globals.css";
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { ReactQueryProvider } from "@/components/react-query-provider";
 
@@ -35,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <ToastContainer style={{ fontSize: 14 }} />
           </ThemeProvider>
         </ReactQueryProvider>
       </body>

@@ -36,8 +36,6 @@ export async function updateMeals(
       });
     }
 
-    console.log(meals);
-
     const changedFields = Object.entries(data).filter(([key, value]) => {
       return meals[key as keyof typeof meals] !== value;
     });
@@ -48,33 +46,7 @@ export async function updateMeals(
       });
     }
 
-    if (data.name) {
-      const existingName = await knex("meals")
-        .where({ name: data.name })
-        .andWhereNot("id", id, user_id)
-        .first();
-
-      if (existingName) {
-        return reply
-          .status(400)
-          .send({ message: "Nome já cadastrado por outro usuário!" });
-      }
-    }
-
-    if (data.description) {
-      const existingEmail = await knex("meals")
-        .where({ description: data.description })
-        .andWhereNot("id", id, user_id)
-        .first();
-
-      if (existingEmail) {
-        return reply
-          .status(400)
-          .send({ message: "E-mail já cadastrado por outro usuário!" });
-      }
-    }
-
-    await knex("meals").where("id", id, user_id).update(data);
+    await knex("meals").where({ id, user_id }).update(data);
 
     return reply.send({
       message: "Refeição atualizada com sucesso!",

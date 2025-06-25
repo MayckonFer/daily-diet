@@ -30,9 +30,12 @@ export async function session(request: FastifyRequest, reply: FastifyReply) {
       user_id: user.id,
     });
 
-    reply.cookie("sessionId", sessionId, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 1, // 1 dias (tempo para expirar o cookie do usuário)
+    reply.setCookie("session_id", sessionId, {
+      path: "/", // define em quais rotas o cookie será enviado pelo navegador ('/' = todas)
+      httpOnly: true, // impede que o cookie seja acessado via JS no navegador
+      secure: process.env.NODE_ENV === "production", // o cookie só será enviado via HTTPS (true em produção)
+      sameSite: "lax", // lax em desenvolvimento
+      maxAge: 60 * 60 * 24, // 1 dia
     });
 
     reply.status(201).send({

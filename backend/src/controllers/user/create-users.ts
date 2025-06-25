@@ -6,7 +6,7 @@ import { knex } from "../../database";
 
 export async function createUser(request: FastifyRequest, reply: FastifyReply) {
   const createUsersSchema = z.object({
-    name: z.string().min(3, "Nome deve ter no minimo 3 caracteres"),
+    name: z.string().min(1, "Nome deve ter no minimo 3 caracteres"),
     email: z.string().email("E-mail invalido!"),
     password: z
       .string()
@@ -39,8 +39,7 @@ export async function createUser(request: FastifyRequest, reply: FastifyReply) {
   } catch (error) {
     if (error instanceof ZodError) {
       return reply.status(400).send({
-        message: "Erro de validação.",
-        issues: error.errors,
+        message: error.errors.map((err) => err.message),
       });
     }
 

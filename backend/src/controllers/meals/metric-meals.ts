@@ -10,7 +10,7 @@ export async function metricMeals(
 
   if (meals.length === 0) {
     return reply.status(400).send({
-      message: "Não tem porra nhm",
+      message: "Não há refeições cadastradas no momento!",
     });
   }
 
@@ -31,12 +31,25 @@ export async function metricMeals(
     }
   }
 
+  const totalMeals = meals.length;
+  const totalMealsOnDiet = meals.filter((meal) => !!meal.isDiet).length;
+  const totalMealsOutDiet = meals.filter((meal) => !meal.isDiet).length;
+
+  const percentageOnDiet = Number(
+    ((totalMealsOnDiet / totalMeals) * 100).toFixed(2)
+  );
+  const percentageOutDiet = Number(
+    ((totalMealsOutDiet / totalMeals) * 100).toFixed(2)
+  );
+
   const metricsMeals = {
-    totalMeals: meals.length,
-    totalMealsOnDiet: meals.filter((meal) => !!meal.isDiet).length,
-    totalMealsOutDiet: meals.filter((meal) => !meal.isDiet).length,
+    totalMeals,
+    totalMealsOnDiet,
+    totalMealsOutDiet,
     bestSequence: bestSequence,
+    percentageOnDiet,
+    percentageOutDiet,
   };
 
-  return { metricsMeals };
+  return metricsMeals;
 }

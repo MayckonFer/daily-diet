@@ -6,7 +6,7 @@ export async function checkSessionIdExist(
   reply: FastifyReply
 ) {
   // Validação de cookie como se fosse o token, se não tiver o sessionId ele não deixar passar
-  const cookieSessionId = request.cookies.sessionId;
+  const cookieSessionId = request.cookies.session_id;
 
   if (!cookieSessionId) {
     return reply.status(401).send({

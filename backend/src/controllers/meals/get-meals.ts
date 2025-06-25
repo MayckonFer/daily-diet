@@ -7,7 +7,7 @@ export async function getMeals(request: FastifyRequest, reply: FastifyReply) {
 
   if (meals.length === 0) {
     return reply.status(400).send({
-      message: "Não tem porra nhm",
+      message: "Não há refeições cadastradas ainda!",
     });
   }
 
