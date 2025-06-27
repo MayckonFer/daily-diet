@@ -91,7 +91,7 @@ export function RegisterForm({
           />
         </div>
         <div className="grid gap-3">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Label htmlFor="password">Senha</Label>
             {errors.password && (
               <InputMessage message={errors.password.message} />

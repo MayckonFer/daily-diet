@@ -48,8 +48,10 @@ export function EditMealForm({ meal }: MealResponse) {
     resolver: zodResolver(editMealSchema),
   });
 
-  const styleYesButton = "border-1 border-green-500 bg-green-100";
-  const styleNotButton = "border-1 border-red-500 bg-red-100";
+  const styleYesButton =
+    "border-1 border-green-500 bg-green-100 dark:border-1 dark:border-green-500 dark:bg-green-100 dark:text-neutral-700";
+  const styleNotButton =
+    "border-1 border-red-500 bg-red-100 dark:border-red-500 dark:bg-red-100 dark:text-neutral-700";
 
   const onDiet = isDietCheckButton === "onDiet" ? styleYesButton : "";
   const outDiet = isDietCheckButton === "outDiet" ? styleNotButton : "";

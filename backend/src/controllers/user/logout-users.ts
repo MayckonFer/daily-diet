@@ -13,7 +13,7 @@ export async function logout(_request: FastifyRequest, reply: FastifyReply) {
 
     return reply.code(200).send({
       statusCode: 200,
-      message: "Logout realizado com sucesso.",
+      message: "Saindo...",
     });
   } catch (error) {
     if (error instanceof ZodError) {

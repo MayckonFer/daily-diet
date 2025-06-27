@@ -19,10 +19,6 @@ export default async function EditMeal({ params }: Params) {
     },
   });
 
-  const meal = response.data;
-
-  console.log(meal);
-
   return (
     <>
       <EditMealForm meal={response.data} />
